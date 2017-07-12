@@ -1,0 +1,54 @@
+/* add your CSS here */
+
+.item-list {
+	list-style-type: none;
+}
+
+.fact{
+	font-style: italic;
+}
+
+span {
+	font-weight: bold;
+	color: #846856;
+}
+
+img {
+	width: 300px;
+}
+
+.border {
+	border-width: 0.5px;
+    border-style: solid;
+    border-color: #846856;
+    border-radius: 10px;
+    background: #fff;
+}
+
+
+.card-box {
+	width: 300px;
+	border-color: 0.5px;
+}
+
+.box {
+	margin: 15px 0px 15px 0px;
+	
+}
+
+.info {
+	background: rgba(203, 191, 161, 0.18);
+	
+}
+
+.info, 
+p {
+    padding: 5px 5px 5px 5px; 
+}
+
+h3 {
+	text-transform: uppercase;
+    text-align: center;
+    padding: 5px 5px;
+    color: #846856;
+}
