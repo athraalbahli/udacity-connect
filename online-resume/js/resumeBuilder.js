@@ -15,7 +15,7 @@ This is empty on purpose! Your code to build the resume will go here.
     "welcomeMessage": "welcome message" ,
     "skills": ["programming" , "comunication" , "leadreship" , "design" ],
     "biopic": "images/fry.jpg"
- }
+ };
 
  var work = {
  	"jobs": [
@@ -34,7 +34,7 @@ This is empty on purpose! Your code to build the resume will go here.
  		"description": "description description description description description description description description description description description description description description description description description description description description description description description" 
  		} ,
  	]
- }
+ };
 
  var projects = {
  	"projects": [
@@ -52,7 +52,7 @@ This is empty on purpose! Your code to build the resume will go here.
  	},
 
     ]
- }
+ };
 
 var education = {
     "schools" : [
@@ -79,7 +79,7 @@ var education = {
         "url": "https://www.Udacity.com/",
         }
     ]
-}
+};
 
 $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
 $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
