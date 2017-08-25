@@ -6,15 +6,35 @@ This is empty on purpose! Your code to build the resume will go here.
  	"name" : "Athra Albahli",
     "role" : "Web Developer",
     "contacts" : {
-        "mobile": "0543392955",
+        "mobile": "+966543392955",
         "email": "athraalbahli@gmail.com",
         "github": "athraalbahli",
         "twitter": "athraalbahli",
         "location": "Dhahran",
     },
-    "welcomeMessage": "welcome message" ,
-    "skills": ["programming" , "comunication" , "leadreship" , "design" ],
-    "biopic": "images/fry.jpg"
+    "welcomeMessage": "Welcome to my online resume" ,
+    "skills": ["Programming" , "Comunication" , "Teamwork" , "Design" ],
+    "biopic": "images/avatar.png",
+    display: function(){
+        $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
+        $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
+        $("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+        $("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
+        $("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
+        $("#topContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+        $("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+        $("#header").append(HTMLbioPic.replace("%data%", bio.biopic));
+        $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
+        $("#header").append(HTMLskillsStart);
+        bio.skills.forEach(function(skill){
+            $("#skills").append(HTMLskills.replace("%data%", skill));
+        });
+        $("#footerContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+        $("#footerContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
+        $("#footerContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
+        $("#footerContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+        $("#footerContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+     }
  };
 
  var work = {
@@ -33,25 +53,45 @@ This is empty on purpose! Your code to build the resume will go here.
  		"dates": "2015 - in progress" ,
  		"description": "description description description description description description description description description description description description description description description description description description description description description description description" 
  		} ,
- 	]
+ 	],
+    display: function () {
+        work.jobs.forEach(function(job){
+            $(".work-entry").append(HTMLworkEmployer.replace("%data%", job.employer));
+            $("a:last").append(HTMLworkTitle.replace("%data%",job.title ));
+            $(".work-entry").append(HTMLworkDates.replace("%data%", job.dates));
+            var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+            $(".work-entry:last").append(formattedLocation);
+            $(".work-entry").append(HTMLworkDescription.replace("%data%", job.description));
+        });
+    }
  };
 
- var projects = {
- 	"projects": [
- 	{
-        "title": "project title 1",
-        "dates": "2014 - 2015",
-        "description": "description description description description description description description description description description description description description description description description description description description description description description description",
-        "images": ["images/197x148.gif","images/197x148.gif"]		
- 	},
- 	{
-        "title": "project title 2",
-        "dates": "2016 - 2017",
-        "description": "description description description description description description description description description description description description description description description description description description description description description description description",
-        "images": ["images/197x148.gif","images/197x148.gif"]		
- 	},
-
-    ]
+var projects = {
+    "projects": [
+    {
+        "title": "Animal Trading Cards",
+        "dates": "2017",
+        "description": "Lorem ipsum dolor sit amet, est vehicula sapien vestibulum tellus amet nec, arcu curabitur, at elit consectetuer orci wisi molestie, cras eu eget non erat, cursus vivamus non dignissim. Nunc turpis ac eget wisi erat",
+        "images": ["images/resume.png"]       
+    },
+    {
+        "title": "Portfilio site",
+        "dates": "2017",
+        "description": "Volutpat lobortis adipiscing, odio condimentum adipiscing pretium porttitor odio. Praesent litora lacinia velit, eu et diam elit est. Doloribus lectus maecenas eleifend massa ut duis",
+        "images": ["images/portfilio.jpg"]       
+    },
+    ],
+    
+    display: function() {
+        projects.projects.forEach(function(project){
+            $(".project-entry").append(HTMLprojectTitle.replace("%data%", project.title));
+            $(".project-entry").append(HTMLprojectDates.replace("%data%", project.dates));
+            $(".project-entry").append(HTMLprojectDescription.replace("%data%", project.description));
+            project.images.forEach(function(image){
+                $(".project-entry").append(HTMLprojectImage.replace("%data%", image));
+            });  
+        });
+    }
  };
 
 var education = {
@@ -60,87 +100,55 @@ var education = {
         "name": "University of Dammam",
         "location": "Dammam",
         "degree": "Bachelor",
-        "majors": ["computer science"],
-        "dates": "2006-2012",
+        "majors": ["Computer Science"],
+        "dates": "2006 - 2012",
         "url": "https://www.iau.edu.sa/en",
         }
     ],
     "onlineCourses" : [
         {
-        "title" : "C#",
+        "title" : " C# Fundamentals",
         "school" : "Udemy",
-        "dates": "2017", 
-        "url": "https://www.udemy.com/",
+        "dates": "2016 - 2017", 
+        "url": "https://www.udemy.com/csharp-tutorial-for-beginners/learn/",
         },
         {
-        "title" : "Front End",
+        "title" : "Frontend Web Development Nanodegrees",
         "school" : "Udacity",
         "dates": "2017", 
         "url": "https://www.Udacity.com/",
         }
-    ]
+    ] ,
+    display: function () {
+        education.schools.forEach(function(school){
+            $(".education-entry").append(HTMLschoolName.replace("%data%", school.name));
+            $("a:last").append(HTMLschoolDegree.replace("%data%", school.degree));
+            $(".education-entry").append(HTMLschoolDates.replace("%data%", school.dates));
+            $(".education-entry").append(HTMLschoolLocation.replace("%data%", school.location));
+            school.majors.forEach(function(major){
+                $(".education-entry").append(HTMLschoolMajor.replace("%data%", major));
+            });
+        });
+        $("#education").append(HTMLonlineClasses);
+        $("#education").append(HTMLschoolStart);
+        education.onlineCourses.forEach(function(course) {
+            $(".education-entry:last").append(HTMLonlineTitle.replace("%data%", course.title));
+            $("a:last").append(HTMLonlineSchool.replace("%data%", course.school));
+            $(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.dates));
+            $(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url));
+        });
+    }
 };
 
-$("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
-$("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
-$("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
-$("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
-$("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
-$("#topContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
-$("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
-$("#header").append(HTMLbioPic.replace("%data%", bio.biopic));
-$("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
-$("#header").append(HTMLskillsStart);
-for (var skill in bio.skills ) {
-  $("#skills").append(HTMLskills.replace("%data%", bio.skills[skill]));
-}
-
-$("#footerContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
-$("#footerContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
-$("#footerContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
-$("#footerContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
-$("#footerContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+bio.display();
 
 $("#workExperience").append(HTMLworkStart);
-for (var job in work.jobs ) {
-$(".work-entry").append(HTMLworkEmployer.replace("%data%", work.jobs[job].employer));
-$("a:last").append(HTMLworkTitle.replace("%data%",work.jobs[job].title ));
-$(".work-entry").append(HTMLworkDates.replace("%data%", work.jobs[job].dates));
-var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-$(".work-entry:last").append(formattedLocation);
-$(".work-entry").append(HTMLworkDescription.replace("%data%", work.jobs[job].description));
-}
-
-$("#projects").append(HTMLprojectStart);
-for ( var project in projects.projects) {
-	$(".project-entry").append(HTMLprojectTitle.replace("%data%", projects.projects[project].title));
-	$(".project-entry").append(HTMLprojectDates.replace("%data%", projects.projects[project].dates));
-	$(".project-entry").append(HTMLprojectDescription.replace("%data%", projects.projects[project].description));
-    for ( var img in projects.projects[project].images )
-    {
-      $(".project-entry").append(HTMLprojectImage.replace("%data%", projects.projects[project].images[img]));
-    }	
-}
+work.display();
+        $("#projects").append(HTMLprojectStart);
+projects.display();
 
 $("#education").append(HTMLschoolStart);
-for ( var school in education.schools) {
-    $(".education-entry").append(HTMLschoolName.replace("%data%", education.schools[school].name));
-    $("a:last").append(HTMLschoolDegree.replace("%data%", education.schools[school].degree));
-    $(".education-entry").append(HTMLschoolDates.replace("%data%", education.schools[school].dates));
-    $(".education-entry").append(HTMLschoolLocation.replace("%data%", education.schools[school].location));
-     for( var major in education.schools[school].majors) {
-         $(".education-entry").append(HTMLschoolMajor.replace("%data%", education.schools[school].majors));
-     }
-}
-
- $("#education").append(HTMLonlineClasses);
- $("#education").append(HTMLschoolStart);
-  for ( var course in education.onlineCourses) {
-    $(".education-entry:last").append(HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title));
-    $("a:last").append(HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school));
-    $(".education-entry:last").append(HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates));
-    $(".education-entry:last").append(HTMLonlineURL.replace("%data%", education.onlineCourses[course].url));
- }
+education.display();
 
 //$("#mapDiv").append(internationalizeButton);
 $("#mapDiv").append(googleMap);
