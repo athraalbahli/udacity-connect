@@ -9,8 +9,8 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug-copy1.png';
     this.x = 1;
-    this.y = Enemy.prototype.randomPosition();
-    this.speed =  Enemy.prototype.randomSpeed();
+    this.y = this.randomPosition();
+    this.speed =  this.randomSpeed();
     console.log(this.speed);
 };
 
@@ -37,7 +37,7 @@ Enemy.prototype.update = function(dt) {
         this.x = (this.x + ( this.speed * dt )) ;
     } else {
         this.x = 1 ;
-        this.y = Enemy.prototype.randomPosition();
+        this.y = this.randomPosition();
     }
 };
 
@@ -98,16 +98,22 @@ Player.prototype.checkCollision = function() {
   var collision = '0';
 
   allEnemies.forEach(function(enemy){
-    var case1 , case2 , case3 , case4 ;
-    enemy.x < playerx && playerx < (enemy.x + 90) && enemy.y <  playery && playery < (enemy.y + 60) ? case1 = true : case1 = false;
-    enemy.x < ( playerx + 60 ) && ( playerx + 60 ) < (enemy.x + 90) && enemy.y <  playery && playery < (enemy.y + 60) ? case2 = true : case2 = false;
-    enemy.x < playerx && playerx < (enemy.x + 90) && enemy.y <  (playery + 70 ) && (playery + 70 ) < (enemy.y + 60) ? case3 = true : case3 = false;
-    enemy.x < ( playerx + 60 ) && ( playerx + 60 ) < (enemy.x + 90) && enemy.y <  (playery + 70 ) && (playery + 70 ) < (enemy.y + 60) ? case4 = true : case4 = false;
-    enemy.x < playerx && playerx < (enemy.x + 90) && enemy.y <  ( playery + 35 ) && ( playery + 35 ) < (enemy.y + 60) ? case5 = true : case5 = false;
-     enemy.x < ( playerx + 60 ) && ( playerx + 60 ) < (enemy.x + 90) && enemy.y <  ( playery + 35 ) && ( playery + 35 ) < (enemy.y + 60) ? case6 = true : case6 = false;
-    if (case1 || case2 || case3 || case4 || case5 || case6) {
+    var case1 , case2  ;
+    var y = [0,35,70];
+
+    for (var i = 0 ; i < 3 ; i ++)
+    {
+      enemy.x < playerx && playerx < (enemy.x + 90) && enemy.y < (playery + y[i] ) && (playery + y[i] ) < (enemy.y + 60) ? case1 = true : case1 = false;
+      enemy.x < ( playerx + 60 ) && ( playerx + 60 ) < (enemy.x + 90) && enemy.y <  (playery + y[i] ) && (playery + y[i] ) < (enemy.y + 60) ? case2 = true : case2 = false;
+      if ( case1 || case2 ) {
+        break;
+      }
+    }
+
+    if (case1 || case2 ) {
       collision =  '1';
     }
+
   });
   return collision;
 };
@@ -139,19 +145,16 @@ Player.prototype.restart = function(){
     $("#mycanvas").hide();
     $("#game").hide();
     $("#startgame").show();
-    //$("#game-over").show();
-    //$("#score").append('<span>' + this.score + '</span>');
-
 };
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var Enemy1 = new Enemy();
-var Enemy2 = new Enemy();
-var Enemy3 = new Enemy();
-var Enemy4 = new Enemy();
-//var Enemy5 = new Enemy();
-var allEnemies = [Enemy1 ,Enemy2 , Enemy3 , Enemy4];
+var enemy1 = new Enemy();
+var enemy2 = new Enemy();
+var enemy3 = new Enemy();
+var enemy4 = new Enemy();
+var allEnemies = [enemy1 ,enemy2 , enemy3 , enemy4];
 var player = new Player('boy');
 
 
@@ -168,7 +171,7 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-  function hello(char){
+  function setPlayer(char){
       var heart = '<span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart"></span>';
       $(".heart-block" ).has(".glyphicon-heart" ).length ? $(".heart-block").append('') : $(".heart-block").append(heart);
       $("#mycanvas").show();
