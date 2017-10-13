@@ -2,6 +2,19 @@ body {
   text-align: center;
 }
 
+p#current-score {
+    margin: 20px;
+}
+
+.score-block {
+    border: solid 1px;
+    border-color: #9d9d9d;
+    border-radius: 12px;
+    padding: 5px 30px;
+    margin-top: 35px;
+    height: 80px;
+}
+
 #boy {
   background: url('../images/char-boy-copy.png') no-repeat;
 }
@@ -27,6 +40,7 @@ body {
   border-radius: 12px;
   padding: 5px 30px;
   margin-top: 35px;
+  height: 80px;
 }
   
 #game {

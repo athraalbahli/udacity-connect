@@ -56,6 +56,7 @@ var Player = function(char) {
     this.y = 490;
     this.lives = 3;
     this.score = 0;
+    $("#current-score").html('Score:<span>'+ this.score +'</span>');
 
 };
 
@@ -65,6 +66,7 @@ Player.prototype.update = function(){
 
   if (this.y <= 50) {
     this.score += 10;
+    $("#current-score").html('Score:<span>'+ this.score +'</span>');
   }
   if( this.y <= 50 || this.y > 490) {
     this.y = 490;
@@ -87,6 +89,7 @@ Player.prototype.update = function(){
 
   if(this.lives == 0) {
     this.restart();
+    this.update = function(){};
   }
 };
 
@@ -145,6 +148,8 @@ Player.prototype.restart = function(){
     $("#mycanvas").hide();
     $("#game").hide();
     $("#startgame").show();
+    $("#score").append('<span>'+ this.score+'</span>');
+    $("#game-over").show();
 };
 
 // Now instantiate your objects.
@@ -177,6 +182,8 @@ document.addEventListener('keyup', function(e) {
       $("#mycanvas").show();
       $("#game").show();
       $("#startgame").hide();
+      $("#score span:last-child").remove();
+      $("#game-over").hide();
        player = new Player(char);
      }
 
